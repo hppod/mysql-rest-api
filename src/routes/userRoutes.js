@@ -9,9 +9,16 @@ module.exports = function (app) {
 
     app.post('/convenio', (req, res) => {
         const userData = {
-            CODIGO_CONVENIO: null,
+            CODIGO_CONVENIO: null,            
             NOME: req.body.NOME,
-            AREA_ATUACAO: req.body.AREA_ATUACAO
+            AREA_ATUACAO: req.body.AREA_ATUACAO,
+            ENDERECO: req.body.ENDERECO,
+            NUMERO: req.body.NUMERO,
+            COMPLEMENTO: req.body.COMPLEMENTO,
+            BAIRRO: req.body.BAIRRO,
+            CIDADE: req.body.CIDADE,
+            CEP: req.body.CEP,
+            ESTADO: req.body.ESTADO
         };
 
         User.insertUser(userData, (err, data) => {
@@ -35,7 +42,14 @@ module.exports = function (app) {
         const userData = {
             CODIGO_CONVENIO: req.body.CODIGO_CONVENIO,
             NOME: req.body.NOME,
-            AREA_ATUACAO: req.body.AREA_ATUACAO
+            AREA_ATUACAO: req.body.AREA_ATUACAO,
+            ENDERECO: req.body.ENDERECO,
+            NUMERO: req.body.NUMERO,
+            COMPLEMENTO: req.body.COMPLEMENTO,
+            BAIRRO: req.body.BAIRRO,
+            CIDADE: req.body.CIDADE,
+            CEP: req.body.CEP,
+            ESTADO: req.body.ESTADO
         };
 
         User.updateUser(userData, (err, data) => {
