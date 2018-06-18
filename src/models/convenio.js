@@ -7,9 +7,9 @@ connection = mysql.createConnection({
     database: 'asilo'
 });
 
-let userModel = {};
+let convenioModel = {};
 
-userModel.getUser = (callback) => {
+convenioModel.getConvenio = (callback) => {
     if (connection) {
         connection.query('SELECT * FROM convenio', (err, rows) => {
             if (err) {
@@ -21,9 +21,9 @@ userModel.getUser = (callback) => {
     }
 };
 
-userModel.insertUser = (userData, callback) => {
+convenioModel.insertConvenio = (convenioData, callback) => {
     if (connection) {
-        connection.query('INSERT INTO convenio SET ?', userData,
+        connection.query('INSERT INTO convenio SET ?', convenioData,
             (err, result) => {
                 if (err) {
                     throw err;
@@ -35,13 +35,13 @@ userModel.insertUser = (userData, callback) => {
     }
 };
 
-userModel.updateUser = (userData, callback) => {
+convenioModel.updateConvenio = (convenioData, callback) => {
     if (connection) {
         const sql = `
         UPDATE convenio SET
-        NOME = ${connection.escape(userData.NOME)},
-        AREA_ATUACAO = ${connection.escape(userData.AREA_ATUACAO)}
-        WHERE CODIGO_CONVENIO = ${connection.escape(userData.CODIGO_CONVENIO)}
+        NOME = ${connection.escape(convenioData.NOME)},
+        AREA_ATUACAO = ${connection.escape(convenioData.AREA_ATUACAO)}
+        WHERE CODIGO_CONVENIO = ${connection.escape(convenioData.CODIGO_CONVENIO)}
         `
         connection.query(sql, (err, result) => {
             if (err) {
@@ -55,25 +55,25 @@ userModel.updateUser = (userData, callback) => {
     }
 }
 
-userModel.deleteUser = (id, callback)=>{
-    if(connection){
+convenioModel.deleteConvenio = (id, callback) => {
+    if (connection) {
         const sql = `SELECT * FROM convenio WHERE CODIGO_CONVENIO = ${connection.escape(id)}`;
 
-        connection.query(sql, (err, row)=>{
-            if(row){
+        connection.query(sql, (err, row) => {
+            if (row) {
                 let sql = `DELETE FROM convenio WHERE CODIGO_CONVENIO = ${connection.escape(id)}`;
 
-                connection.query(sql, (err, row)=>{
-                    if(err){
+                connection.query(sql, (err, row) => {
+                    if (err) {
                         throw err;
-                    }else{
-                        callback(null,{
-                            msg:'deleted'
+                    } else {
+                        callback(null, {
+                            msg: 'deleted'
                         })
                     }
                 })
-            }else{
-                callback(null,{
+            } else {
+                callback(null, {
                     msg: 'not exists'
                 })
             }
@@ -81,4 +81,4 @@ userModel.deleteUser = (id, callback)=>{
     }
 }
 
-module.exports = userModel;
+module.exports = convenioModel;

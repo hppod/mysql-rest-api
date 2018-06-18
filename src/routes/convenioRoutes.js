@@ -1,14 +1,14 @@
-const User = require('../models/user');
+const Convenio = require('../models/convenio');
 
 module.exports = function (app) {
     app.get('/convenio', (req, res) => {
-        User.getUser((err, data) => {
+        Convenio.getConvenio((err, data) => {
             res.status(200).json(data);
         });
     });
 
     app.post('/convenio', (req, res) => {
-        const userData = {
+        const convenioData = {
             CODIGO_CONVENIO: null,            
             NOME: req.body.NOME,
             AREA_ATUACAO: req.body.AREA_ATUACAO,
@@ -21,7 +21,7 @@ module.exports = function (app) {
             ESTADO: req.body.ESTADO
         };
 
-        User.insertUser(userData, (err, data) => {
+        Convenio.insertConvenio(convenioData, (err, data) => {
             if (data && data.insertId) {
                 console.log(data);
                 res.json({
@@ -39,7 +39,7 @@ module.exports = function (app) {
     });
 
     app.put('/convenio', (req, res) => {
-        const userData = {
+        const convenioData = {
             CODIGO_CONVENIO: req.body.CODIGO_CONVENIO,
             NOME: req.body.NOME,
             AREA_ATUACAO: req.body.AREA_ATUACAO,
@@ -52,7 +52,7 @@ module.exports = function (app) {
             ESTADO: req.body.ESTADO
         };
 
-        User.updateUser(userData, (err, data) => {
+        Convenio.updateConvenio(convenioData, (err, data) => {
             if (data && data.msg) {
                 res.json(data)
             } else {
@@ -65,7 +65,7 @@ module.exports = function (app) {
     });
 
     app.delete('/convenio/:id', (req, res) => {
-        User.deleteUser(req.params.id, (err, data) => {
+        Convenio.deleteConvenio(req.params.id, (err, data) => {
             if (data && data.msg === 'deleted' || data.msg === 'not exists') {
                 res.json({
                     sucess: true,
