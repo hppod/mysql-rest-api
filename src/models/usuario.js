@@ -42,7 +42,7 @@ usuarioModel.updateUsuario = (usuarioData, callback) => {
         LOGON = ${connection.escape(usuarioData.LOGON)},
         EMAIL = ${connection.escape(usuarioData.EMAIL)},
         SENHA = ${connection.escape(usuarioData.SENHA)}
-        WHERE CODIGO_USUARIO = ${connection.escape(convenioData.CODIGO_USUARIO)}
+        WHERE CODIGO_USUARIO = ${connection.escape(usuarioData.CODIGO_USUARIO)}
         `
 
         connection.query(sql, (err, result) => {

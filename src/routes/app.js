@@ -19,6 +19,7 @@ app.use(cors({
 require('./convenioRoutes')(app);
 require('./medicamentoRoutes')(app);
 require('./usuarioRoutes')(app);
+require('./pacienteRoutes')(app);
 
 app.listen(app.get('port'), () => {
     console.log('server on port 3000');
